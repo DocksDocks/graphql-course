@@ -1,12 +1,12 @@
-const post = () => {
-  return {
-    id: '1',
-    title: 'Post title 1',
-  };
+const post = async (_, { id }, { getPosts }) => {
+  const response = await getPosts(id);
+  const posts = response.json();
+  return posts;
 };
 
-const posts = async (_, __, { fetch }) => {
-  const posts = await fetch('http://localhost:3000/posts');
+const posts = async (_, __, { getPosts }) => {
+  const response = await getPosts();
+  const posts = response.json();
   return posts;
 };
 
