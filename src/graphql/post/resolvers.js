@@ -5,6 +5,7 @@ const post = async (_, { id }, { getPosts }) => {
     return {
       statusCode: 404,
       message: 'Post not found',
+      postId: id,
     };
   }
   return post;
@@ -18,10 +19,7 @@ const posts = async (_, { input }, { getPosts }) => {
 };
 
 export const postResolvers = {
-  Query: {
-    post,
-    posts,
-  },
+  Query: { post, posts },
   PostResult: {
     __resolveType: (obj) => {
       if (typeof obj.statusCode !== 'undefined') return 'PostNotFoundError';
